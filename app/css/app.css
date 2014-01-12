@@ -1,5 +1,167 @@
 /* app css stylesheet */
+#main {
+  padding-top: 44px;
+}
+/** Masonry */
+.masonry {
+  margin: 0 auto;
 
+}
+
+.masonry .masonry-brick {
+  width:  320px;
+  height: 150px;
+  float: left;
+  background: #D26;
+  border: 2px solid #333;
+  border-color: hsla(0, 0%, 0%, 0.5);
+  border-radius: 5px;
+  opacity: 0.8;
+  text-align: center;
+}
+
+.item.w2 { width:  120px; }
+.item.w3 { width:  180px; }
+.item.w4 { width:  240px; }
+
+.item.h2 { height: 100px; }
+.item.h3 { height: 130px; }
+.item.h4 { height: 180px; }
+
+
+
+
+
+/* Panel */
+
+.activity {
+  padding: 15px;
+  margin-left: 30px;
+}
+.category-list input, .category-list button {
+  padding: 15px;
+  height: auto;
+  margin-left: 30px;
+  border-bottom: 1px solid rgba(0,0,0, 0.1);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  background-color: #282D38;
+  border-radius: 0;
+  border-left: none;
+  border-right: none;
+  width: auto !important;
+  color: #555 !important;
+}
+body {
+  overflow-x: hidden;
+}
+#category-form button {
+  position: absolute;
+  right: 0;
+}
+.category-list label {
+  position: relative;
+  padding: 15px;
+  font-size: 14px;
+  cursor: pointer;
+  margin-left: 20px;
+  width: 100%;
+}
+.category-list label span {
+  color: #eee !important;
+}
+.category-list label:before, .category-list label:after {
+  font-family: 'Glyphicons Halflings';
+  position: absolute;
+  left: -5px;
+}
+.category-list label:after {
+  content: '\e080'; /*checked*/
+  /*CSS3 transitions for animated effect*/
+  transition: all 0.1s;
+}
+
+/*hiding the original checkboxes*/
+.category-list input[type="checkbox"] {
+  display: none;
+}
+/*when the user checks the checkbox the checked icon will animate in*/
+.category-list input[type="checkbox"]:checked +  label:after {
+  transform: rotate(90deg);
+  -webkit-transform:rotate(90deg);
+  -moz-transform:rotate(90deg);
+  -o-transform:rotate(90deg);
+}
+.snap-content {
+  background-image: url("../img/The_Great_Wave_off_Kanagawa.jpg");
+  background-size: cover;
+  -moz-box-shadow: 0 0 20px #888;
+  -webkit-box-shadow: 0 0 20px #888;
+  box-shadow: 0 0 20px #888;
+}
+.snap-drawers {
+  background: #323949;
+}
+.snap-drawer-left {
+  overflow-x: hidden;
+}
+.snap-drawer {
+  background: #323949;
+  color: #eee;
+}
+
+.snap-drawer h3 {
+  font-size: 36px;
+  font-weight: normal;
+  margin: 15px;
+}
+.snap-drawer h4 {
+  padding: 15px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  margin-bottom: 0;
+}
+.snap-drawer ul {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+}
+.snap-drawer li {
+  display: block;
+  border-bottom: 1px solid rgba(0,0,0, 0.1);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  font-weight: bold;
+  text-shadow: 0 1px 0 #000;
+  text-decoration: none;
+  color: #ccc;
+}
+#toolbar {
+  background: #536ea7;
+  border-bottom: 1px solid #111b32;
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  width: auto;
+  height: 44px;
+}
+#toolbar h1 {
+     color: #fff;
+     font-size: 16px;
+     line-height: 22px;
+     text-align: center;
+     text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.8);
+     position: absolute;
+     top: 0;
+     right: 44px;
+     left: 44px;
+     width: auto;
+     height: 44px;
+   }
+#open {
+   background: url(../img/open.png) center center no-repeat;
+   display: block;
+   width: 44px;
+   height: 44px;
+ }
 .menu {
   list-style: none;
   border-bottom: 0.1em solid black;

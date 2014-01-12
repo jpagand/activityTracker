@@ -1,1 +1,11 @@
-<p>This is the partial for view 1.</p>
+
+<div ng-controller="Masonry" masonry="{isFitWidth: true}" class="masonry">
+<div ng-repeat="activity in activities" class="masonry-brick" ng-style="{'background': activity.activity.color}">
+  <h4>{{ activity.activity.name }}</h4>
+  <h2>{{ timers[activity.activity.id || activity.activity.tempId] | timer}}</h2>
+  <p>
+    <button ng-hide="activity.runningEvent" ng-click="start(activity)" class="btn btn-default btn-lg">Start</button>
+    <button ng-show="activity.runningEvent" ng-click="stop(activity)" class="btn btn-default btn-lg">Stop</button>
+  </p>
+</div>
+</div>

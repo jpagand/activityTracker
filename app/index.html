@@ -1,26 +1,98 @@
 <!doctype html>
-<html lang="en" ng-app="myApp">
+<html lang="en" ng-app="tracker">
 <head>
   <meta charset="utf-8">
   <title>My AngularJS App</title>
+  <link rel="stylesheet" href="css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="css/color-picker.css"/>
+  <link rel="stylesheet" href="css/snap.css"/>
   <link rel="stylesheet" href="css/app.css"/>
 </head>
 <body>
-  <ul class="menu">
+ <!-- <ul class="menu">
     <li><a href="#/view1">view1</a></li>
     <li><a href="#/view2">view2</a></li>
-  </ul>
+  </ul>      -->
 
-  <div ng-view></div>
 
-  <div>Angular seed app: v<span app-version></span></div>
+ <div snap-content class="snap-content">
+  <div id="toolbar">
+    <a href="javascript:void(0)" id="open" snap-toggle="left"></a>
+    <h1>Activity Tracker</h1>
+  </div>
+  <div id="main" ng-view></div>
 
+  </div>
+
+
+ <!-- LEFT PANEL -->
+ <div snap-drawer class="snap-drawer snap-drawer-left">
+   <div>
+     <h3>Activity</h3>
+     <div ng-controller="Panel">
+     <h4>Categories</h4>
+       <ul>
+         <li ng-repeat="category in categories" class="category-list">
+           <input type="checkbox" name="{{category.name + '-' + $index}}" id="{{category.name + '-' + $index}}" />
+           <label ng-style="{'color': category.color}" for="{{category.name + '-' + $index}}" ng-click="category.collapsed = !category.collapsed"><span>{{ category.name }}</span></label>
+           <div collapse="category.collapsed">
+             <ul>
+               <li class="activity" ng-repeat="activity in category.children">
+                 {{ activity.name }}
+               </li>
+               <form ng-submit="addActivity(category, newActivity)">
+                 <div class="input-group">
+                   <input type="text" class="form-control" ng-model="newActivity.name" placeholder="New activity">
+                   <span class="input-group-btn">
+                     <button type="submit" class="btn btn-default" type="button">Add!</button>
+                    </span>
+                 </div>
+               </form>
+             </ul>
+           </div>
+         </li>
+         <button class="btn btn-primary" ng-click="newCatCollapsed = !newCatCollapsed"><span class="glyphicon glyphicon-plus-sign"></span> New Category</button>
+         <div collapse="newCatCollapsed">
+           <form class="ng-pristine ng-valid" id="category-form">
+           <input type="text" class="form-control" ng-model="newCategory.name" placeholder="Name" required>
+           <input colorpicker="" class="form-control ng-valid ng-dirty" ng-model="newCategory.color" type="text" ng-style="{'background-color': newCategory.color}" placeholder="Pick a color">
+           <div class="checkbox">
+             <label>
+               <input type="checkbox" ng-model="newCategory.singleActivity"> Single activity <a><span tooltip-placement="right" tooltip="If true, activities in this category will never overlap." class="glyphicon glyphicon-question-sign"></span></a>
+             </label>
+           </div>
+           <button class="btn btn-success" ng-click="addCategory(newCategory)">Create</button>
+           </form>
+         </div>
+       </ul>
+     </div>
+   </div>
+ </div>
   <!-- In production use:
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
   -->
+ <script src="components/jquery/jquery.js"></script>
+ <script src="components/jquery-bridget/jquery.bridget.js"></script>
+ <script src="components/get-style-property/get-style-property.js"></script>
+ <script src="components/get-size/get-size.js"></script>
+ <script src="components/eventEmitter/EventEmitter.js"></script>
+ <script src="components/eventie/eventie.js"></script>
+ <script src="components/doc-ready/doc-ready.js"></script>
+ <script src="components/matches-selector/matches-selector.js"></script>
+ <script src="components/outlayer/item.js"></script>
+ <script src="components/outlayer/outlayer.js"></script>
+ <script src="components/masonry/masonry.js"></script>
+ <script src="components/imagesloaded/imagesloaded.js"></script>
   <script src="lib/angular/angular.js"></script>
   <script src="lib/angular/angular-route.js"></script>
+ <script src="lib/lodash.js"></script>
+ <script src="components/angular-masonry/angular-masonry.js"></script>
+  <script src="lib/snap.js"></script>
+  <script src="lib/color-picker.js"></script>
+  <script src="lib/angular-snap.js"></script>
+  <script src="lib/ui-bootstrap.js"></script>
   <script src="js/app.js"></script>
+  <script src="js/services/Category.js"></script>
   <script src="js/services.js"></script>
   <script src="js/controllers.js"></script>
   <script src="js/filters.js"></script>

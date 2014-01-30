@@ -1,11 +1,12 @@
 
 <div ng-controller="Masonry" masonry="{isFitWidth: true}" class="masonry">
 <div ng-repeat="activity in activities" class="masonry-brick" ng-style="{'background': activity.activity.color}">
+  <p><span class="glyphicon glyphicon-cog config" ng-click=openModal(activity)></span></p>
   <h4>{{ activity.activity.name }}</h4>
   <h2>{{ timers[activity.activity.id || activity.activity.tempId] | timer}}</h2>
   <p>
-    <button ng-hide="activity.runningEvent" ng-click="start(activity)" class="btn btn-default btn-lg">Start</button>
-    <button ng-show="activity.runningEvent" ng-click="stop(activity)" class="btn btn-default btn-lg">Stop</button>
+    <button ng-hide="activity.runningEvent" ng-click="start(activity)" ng-style="{'color': 'limegreen'}" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-play"></span></button>
+    <button ng-show="activity.runningEvent" ng-click="stop(activity)" ng-style="{'color': 'red'}" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-stop"></span></button>
   </p>
 </div>
 </div>

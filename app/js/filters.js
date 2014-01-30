@@ -7,12 +7,30 @@ angular.module('tracker.filters', []).
     return function(text) {
       return String(text).replace(/\%VERSION\%/mg, version);
     }
+  }]).
+  filter('timeFrame', ['$filter', function($filter) {
+    return function(timeFilterFrom, timeFilterFrame) {
+      var date = new Date(timeFilterFrom * 1000);
+      if (timeFilterFrame === 'day') {
+        return $filter('date')(date, 'mediumDate');
+      } else if (timeFilterFrame === 'week') {
+        var nextWeek = new Date((timeFilterFrom + (3600 * 24 * 7) - 1) * 1000);
+        return $filter('date')(date, 'mediumDate') + ' - ' + $filter('date')(nextWeek, 'mediumDate');
+      }else if (timeFilterFrame === 'month') {
+        return $filter('date')(date, 'MMMM yyyy');
+      }else if (timeFilterFrame === 'year') {
+        return $filter('date')(date, 'yyyy');
+      }
+      return 'All';
+    }
   }])
   .filter('timer', function() {
     return function(time) {
-      var out = '';
+      if (!_.isFinite(time)) {
+        return '';
+      }
       var sec =  Math.floor((time % 60)) + 's';
-      out = sec;
+      var out = sec;
       var min = Math.floor(time / 60);
       if (min > 0) {
         out = (min % 60) + 'm ' + out;

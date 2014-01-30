@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <title>My AngularJS App</title>
   <link rel="stylesheet" href="css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="css/calendar.css"/>
   <link rel="stylesheet" href="css/color-picker.css"/>
   <link rel="stylesheet" href="css/snap.css"/>
   <link rel="stylesheet" href="css/app.css"/>
@@ -15,10 +16,22 @@
   </ul>      -->
 
 
- <div snap-content class="snap-content">
-  <div id="toolbar">
-    <a href="javascript:void(0)" id="open" snap-toggle="left"></a>
-    <h1>Activity Tracker</h1>
+ <div snap-content class="snap-content"  data-snap-ignore="true" >
+  <div id="toolbar" ng-controller="Header">
+    <a href="javascript:void(0)" class="header-button" snap-toggle="left" ng-click="togglePanel()"><span class="glyphicon glyphicon-align-justify"></span></a>
+    <div class="btn-group">
+    <a href="javascript:void(0)" class="header-button dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-time"></span></a>
+    <ul class="dropdown-menu" role="menu">
+      <li><a href="javascript:void(0)" ng-click="setTimeFilter('day')">Day</a></li>
+      <li><a href="javascript:void(0)" ng-click="setTimeFilter('week')">Week</a></li>
+      <li><a href="javascript:void(0)" ng-click="setTimeFilter('month')">Month</a></li>
+      <li><a href="javascript:void(0)" ng-click="setTimeFilter('year')">Year</a></li>
+      <li><a href="javascript:void(0)" ng-click="setTimeFilter('all')">All</a></li>
+    </ul>
+      </div>
+    <h1>{{ timeFilterFrom | timeFrame:timeFilterFrame }} </h1>
+    <a href="javascript:void(0)"><span class="glyphicon glyphicon-chevron-right header-button right" ng-click="ng-next()" ng-hide="timeFilterFrame === 'all'"></span></a>
+    <a href="javascript:void(0)"><span class="glyphicon glyphicon-chevron-left header-button right" ng-click="previous()" ng-hide="timeFilterFrame === 'all'"></span></a>
   </div>
   <div id="main" ng-view></div>
 
@@ -30,6 +43,9 @@
    <div>
      <h3>Activity</h3>
      <div ng-controller="Panel">
+       <a href="javascript:void(0)" ng-click="login()"><li ><span class="glyphicon glyphicon-user"></span> {{ username }}</li></a>
+     <a href="#/index"><li ><span class="glyphicon glyphicon-th"></span> Timers</li></a>
+     <a href="#/calendar"><li ><span class="glyphicon glyphicon-calendar"></span> Calendar</li></a>
      <h4>Categories</h4>
        <ul>
          <li ng-repeat="category in categories" class="category-list">
@@ -55,13 +71,13 @@
          <div collapse="newCatCollapsed">
            <form class="ng-pristine ng-valid" id="category-form">
            <input type="text" class="form-control" ng-model="newCategory.name" placeholder="Name" required>
-           <input colorpicker="" class="form-control ng-valid ng-dirty" ng-model="newCategory.color" type="text" ng-style="{'background-color': newCategory.color}" placeholder="Pick a color">
+           <button colorpicker="" class="btn btn-default" ng-model="newCategory.color" ng-style="{'background-color': newCategory.color}" type="button">Pick a color</button>
            <div class="checkbox">
              <label>
                <input type="checkbox" ng-model="newCategory.singleActivity"> Single activity <a><span tooltip-placement="right" tooltip="If true, activities in this category will never overlap." class="glyphicon glyphicon-question-sign"></span></a>
              </label>
            </div>
-           <button class="btn btn-success" ng-click="addCategory(newCategory)">Create</button>
+           <button class="btn btn-success" ng-click="addCategory(newCategory)" type="submit">Create</button>
            </form>
          </div>
        </ul>
@@ -71,7 +87,11 @@
   <!-- In production use:
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
   -->
+
+ <script type="text/javascript" src="phonegap.js"></script>
+ <script type="text/javascript" src="childbrowser.js"></script>
  <script src="components/jquery/jquery.js"></script>
+ <script src="lib/jquery-ui.js"></script>
  <script src="components/jquery-bridget/jquery.bridget.js"></script>
  <script src="components/get-style-property/get-style-property.js"></script>
  <script src="components/get-size/get-size.js"></script>
@@ -85,6 +105,8 @@
  <script src="components/imagesloaded/imagesloaded.js"></script>
   <script src="lib/angular/angular.js"></script>
   <script src="lib/angular/angular-route.js"></script>
+  <script src="lib/calendar.js"></script>
+  <script src="lib/fullcalendar.js"></script>
  <script src="lib/lodash.js"></script>
  <script src="components/angular-masonry/angular-masonry.js"></script>
   <script src="lib/snap.js"></script>
@@ -93,9 +115,11 @@
   <script src="lib/ui-bootstrap.js"></script>
   <script src="js/app.js"></script>
   <script src="js/services/Category.js"></script>
+  <script src="js/services/Pryv.js"></script>
   <script src="js/services.js"></script>
   <script src="js/controllers.js"></script>
   <script src="js/filters.js"></script>
   <script src="js/directives.js"></script>
+
 </body>
 </html>

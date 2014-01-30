@@ -1,4 +1,7 @@
 /* app css stylesheet */
+.tooltip {
+  z-index: 10;
+}
 #main {
   padding-top: 44px;
 }
@@ -19,7 +22,13 @@
   opacity: 0.8;
   text-align: center;
 }
-
+.masonry-brick .config {
+  font-size: 18px;
+  right: 5px;
+  top: 5px;
+  position: absolute;
+  cursor: pointer;
+}
 .item.w2 { width:  120px; }
 .item.w3 { width:  180px; }
 .item.w4 { width:  240px; }
@@ -28,10 +37,38 @@
 .item.h3 { height: 130px; }
 .item.h4 { height: 180px; }
 
+.gradient {
+  color: #fff;
+  background: -moz-linear-gradient(45deg,  rgba(0,0,0,0) 0%, rgba(0,0,0,0.25) 100%);
+  background: -webkit-gradient(linear, left bottom, right top, color-stop(0%,rgba(0,0,0,0)), color-stop(100%,rgba(0,0,0,0.25)));
+  background: -webkit-linear-gradient(45deg,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.25) 100%);
+  background: -o-linear-gradient(45deg,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.25) 100%);
+  background: -ms-linear-gradient(45deg,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.25) 100%);
+  background: linear-gradient(45deg,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.25) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#a6000000',GradientType=1 );
+}
 
+.modal {
+  overflow-y: hidden;
+}
 
-
-
+.calendar-drop span {
+  margin-right: 5px;
+  margin-bottom: 5px;
+  font-weight: bold;
+  padding: 5px;
+  text-align: center;
+  float: left;
+}
+.fc-event {
+  font-size: 18px;
+}
+.fc-event .glyphicon {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  z-index: 999;
+}
 /* Panel */
 
 .activity {
@@ -60,11 +97,9 @@ body {
 }
 .category-list label {
   position: relative;
-  padding: 15px;
-  font-size: 14px;
+  padding-left: 15px;
   cursor: pointer;
   margin-left: 20px;
-  width: 100%;
 }
 .category-list label span {
   color: #eee !important;
@@ -118,6 +153,7 @@ body {
   padding: 15px;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   margin-bottom: 0;
+  margin-top: 0;
 }
 .snap-drawer ul {
   padding: 0;
@@ -131,7 +167,13 @@ body {
   font-weight: bold;
   text-shadow: 0 1px 0 #000;
   text-decoration: none;
-  color: #ccc;
+  color: #eee;
+  padding: 15px;
+  font-size: 18px;
+  width: 100%;
+}
+.snap-drawer a:hover {
+  text-decoration: none;
 }
 #toolbar {
   background: #536ea7;
@@ -142,26 +184,41 @@ body {
   left: 0;
   width: auto;
   height: 44px;
+  color: #eee;
 }
 #toolbar h1 {
-     color: #fff;
      font-size: 16px;
      line-height: 22px;
      text-align: center;
      text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.8);
      position: absolute;
      top: 0;
-     right: 44px;
-     left: 44px;
+     right: 88px;
+     left: 88px;
      width: auto;
      height: 44px;
+     margin-top: 0;
    }
-#open {
-   background: url(../img/open.png) center center no-repeat;
+.header-button {
    display: block;
-   width: 44px;
+   width: 44px !important;
    height: 44px;
+  color: #eee;
+  font-size: x-large;
+  text-align: center;
+  margin-top: 7px;
+  float: left;
+  margin-bottom: -10px;
  }
+.header-button.right {
+  float: right;
+}
+.header-button.glyphicon-chevron-right {
+  margin-top: 6px!important;
+}
+.header-button:hover {
+  color: #eee !important;
+}
 .menu {
   list-style: none;
   border-bottom: 0.1em solid black;

@@ -1,5 +1,4 @@
-<p>This is the partial for view 2.</p>
-<p>
-  Showing of 'interpolate' filter:
-  {{ 'Current version is v%VERSION%.' | interpolate }}
-</p>
+<div ng-repeat="activity in activities" class="calendar-drop" data-snap-ignore="true">
+<span class="drop-activity" ng-style="{'background': activity.activity.color}" data-id="{{ activity.activity.id || activity.activity.tempId }}">{{ activity.activity.name }}</span>
+</div>
+<div ui-calendar="calendarOptions" ng-model="eventSources" calendar="myCalendar" data-snap-ignore="true"> </div>
